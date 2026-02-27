@@ -82,10 +82,13 @@ export default function InputForm({ onResult }: Props) {
                     />
                 </div>
                 <div>
-                    <label className={labelClass}>Phone Number</label>
+                    <label className={labelClass}>
+                        Phone Number <span className="text-red-400">*</span>
+                    </label>
                     <input
                         className={inputClass}
                         type="tel"
+                        required
                         placeholder="Phone Number"
                         value={form.phone}
                         onChange={(e) => set("phone", e.target.value)}

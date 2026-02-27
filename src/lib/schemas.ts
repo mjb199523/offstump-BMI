@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const userInputSchema = z.object({
     name: z.string().optional().default(""),
-    phone: z.string().optional().default(""),
+    phone: z.string().min(1, "Phone number is required"),
     age: z.coerce
         .number()
         .int()
