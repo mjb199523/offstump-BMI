@@ -88,12 +88,15 @@ export default function InputForm({ onResult }: Props) {
                         className={inputClass}
                         type="number"
                         min={5}
-                        max={120}
+                        max={100}
                         required
                         placeholder="Age"
                         value={form.age || ""}
                         onChange={(e) => set("age", Number(e.target.value))}
                     />
+                    {form.age && form.age < 18 ? (
+                        <p className="mt-1 text-xs text-amber-400">Estimation may be less accurate for children/teens.</p>
+                    ) : null}
                 </div>
             </div>
 

@@ -1,5 +1,5 @@
 import type { UserInput, PlanResponse } from "./schemas";
-import { calculateBmi, getBmiCategory } from "./bmi";
+import { calculateBmi, getBmiCategory, calculateBodyFatPercent, getBodyFatCategory } from "./bmi";
 
 /* ═══════════════════════════════════════════════════════════════
    Rule-Based Personalized Plan Generator
@@ -414,6 +414,10 @@ export function generatePlan(input: UserInput): PlanResponse {
     const bmiRounded = Math.round(bmi * 10) / 10;
     const category = getBmiCategory(bmi);
 
+    const bfPercent = calculateBodyFatPercent(bmiRounded, input.age, input.gender);
+    const bfPercentRounded = bfPercent !== null ? Math.round(bfPercent * 10) / 10 : null;
+    const bfCategory = bfPercentRounded !== null ? getBodyFatCategory(bfPercentRounded, input.gender) : null;
+
     const calorieTarget = computeCalorieTarget(
         input.weightKg,
         input.heightCm,
@@ -459,6 +463,8 @@ export function generatePlan(input: UserInput): PlanResponse {
     return {
         bmi: bmiRounded,
         category,
+        bodyFatPercent: bfPercentRounded,
+        bodyFatCategory: bfCategory,
         summary,
         calorieTarget,
         dietChart: adjustedChart,

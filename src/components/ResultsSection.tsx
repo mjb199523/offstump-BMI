@@ -58,6 +58,22 @@ export default function ResultsSection({ userInput, plan, onRegenerate }: Props)
                     📊 BMI Analysis
                 </h2>
                 <BMIGauge bmi={plan.bmi} category={plan.category} />
+                {plan.bodyFatPercent != null && (
+                    <div className="mt-8 border-t border-white/10 pt-6">
+                        <h3 className="mb-2 text-sm font-semibold text-white/70">Estimated Body Fat %</h3>
+                        <div className="flex items-center gap-4">
+                            <div className="text-3xl font-black tracking-tight text-white/90">
+                                {plan.bodyFatPercent.toFixed(1)}%
+                            </div>
+                            <div className="rounded-md border border-cyan-400/40 bg-cyan-400/10 px-3 py-1 text-sm font-bold text-cyan-300">
+                                {plan.bodyFatCategory}
+                            </div>
+                        </div>
+                        <p className="mt-2 text-xs text-white/40">
+                            Estimates based on Deurenberg (1991) formula using BMI, age, and sex.
+                        </p>
+                    </div>
+                )}
             </section>
 
             {/* ── Summary ── */}

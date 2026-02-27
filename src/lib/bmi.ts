@@ -47,3 +47,31 @@ export function getBmiGaugePercent(bmi: number): number {
     const bounded = Math.min(Math.max(bmi, min), max);
     return ((bounded - min) / (max - min)) * 100;
 }
+
+export function calculateBodyFatPercent(bmi: number, age: number, gender: string): number | null {
+    if (gender !== "Male" && gender !== "Female") return null;
+    let bf = 0;
+    if (gender === "Male") {
+        bf = (1.20 * bmi) + (0.23 * age) - 16.2;
+    } else {
+        bf = (1.20 * bmi) + (0.23 * age) - 5.4;
+    }
+    return Math.min(Math.max(bf, 2), 75);
+}
+
+export function getBodyFatCategory(bfPercent: number, gender: string): string {
+    if (gender === "Male") {
+        if (bfPercent < 6) return "Essential";
+        if (bfPercent < 14) return "Athletes";
+        if (bfPercent < 18) return "Fitness";
+        if (bfPercent < 25) return "Average";
+        return "High";
+    } else if (gender === "Female") {
+        if (bfPercent < 14) return "Essential";
+        if (bfPercent < 21) return "Athletes";
+        if (bfPercent < 25) return "Fitness";
+        if (bfPercent < 32) return "Average";
+        return "High";
+    }
+    return "Unknown";
+}

@@ -6,7 +6,7 @@ export const userInputSchema = z.object({
         .number()
         .int()
         .min(5, "Age must be at least 5")
-        .max(120, "Age must be at most 120"),
+        .max(100, "Age must be at most 100"),
     gender: z.enum(["Male", "Female", "Other"]),
     heightCm: z.coerce
         .number()
@@ -43,6 +43,8 @@ export const dietChartSchema = z.object({
 export const planResponseSchema = z.object({
     bmi: z.number(),
     category: z.string(),
+    bodyFatPercent: z.number().nullable().optional(),
+    bodyFatCategory: z.string().nullable().optional(),
     summary: z.string(),
     calorieTarget: calorieTargetSchema,
     dietChart: dietChartSchema,

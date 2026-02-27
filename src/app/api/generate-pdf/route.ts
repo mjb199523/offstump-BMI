@@ -212,7 +212,21 @@ export async function POST(req: NextRequest) {
             12,
             categoryColor(plan.category)
         );
-        y -= 4;
+        if (plan.bodyFatPercent != null) {
+            y -= 8;
+            drawBoldLine(
+                `Body Fat %: ${plan.bodyFatPercent.toFixed(1)}%    Category: ${plan.bodyFatCategory}`,
+                12,
+                COL.accent
+            );
+            y -= 4;
+            drawLine(
+                "Estimates based on BMI + age + sex; not a medical diagnosis.",
+                9,
+                COL.muted
+            );
+        }
+        y -= 8;
         drawLine(plan.summary, 10, COL.muted);
 
         drawDivider();
