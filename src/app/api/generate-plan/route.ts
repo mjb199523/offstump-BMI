@@ -20,8 +20,8 @@ export async function POST(req: NextRequest) {
 
         const plan = generatePlan(parsed.data);
 
-        // Asynchronously notify offstump26@gmail.com without blocking the user response
-        sendNotificationEmail(parsed.data, plan).catch(console.error);
+        // Await the notification to ensure Vercel doesn't kill the function early
+        await sendNotificationEmail(parsed.data, plan).catch(console.error);
 
         return NextResponse.json(plan);
     } catch (err) {
