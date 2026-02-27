@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { userInputSchema } from "@/lib/schemas";
 import { generatePlan } from "@/lib/plan-generator";
+import { sendNotificationEmail } from "@/lib/sendEmail";
 
 export async function POST(req: NextRequest) {
     try {
@@ -18,6 +19,10 @@ export async function POST(req: NextRequest) {
         }
 
         const plan = generatePlan(parsed.data);
+
+        // Asynchronously notify offstump26@gmail.com without blocking the user response
+        sendNotificationEmail(parsed.data, plan).catch(console.error);
+
         return NextResponse.json(plan);
     } catch (err) {
         console.error("[generate-plan]", err);
