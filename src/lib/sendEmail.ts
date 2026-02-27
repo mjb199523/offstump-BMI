@@ -26,6 +26,7 @@ A new user has just generated a BMI and Diet Report!
 
 --- User Details ---
 Name: ${userInput.name || "N/A"}
+Phone: ${userInput.phone || "N/A"}
 Age: ${userInput.age}
 Gender: ${userInput.gender}
 Height: ${userInput.heightCm} cm

@@ -194,6 +194,7 @@ export async function POST(req: NextRequest) {
         drawHeading("User Details");
         const details = [
             `Name: ${userInput.name || "N/A"}`,
+            `Phone: ${userInput.phone || "N/A"}`,
             `Age: ${userInput.age}    Gender: ${userInput.gender}`,
             `Height: ${userInput.heightCm} cm    Weight: ${userInput.weightKg} kg`,
             `Activity Level: ${userInput.activityLevel}    Goal: ${userInput.goal}`,

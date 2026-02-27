@@ -5,6 +5,7 @@ import { UserInput, PlanResponse } from "@/lib/schemas";
 
 const initialForm = {
     name: "",
+    phone: "",
     age: "" as unknown as number,
     gender: "" as unknown as UserInput["gender"],
     heightCm: "" as unknown as number,
@@ -68,8 +69,8 @@ export default function InputForm({ onResult }: Props) {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Row 1: Name + Age */}
-            <div className="grid gap-5 sm:grid-cols-2">
+            {/* Row 1: Name + Phone + Age */}
+            <div className="grid gap-5 sm:grid-cols-3">
                 <div>
                     <label className={labelClass}>Name <span className="text-red-400">*</span></label>
                     <input
@@ -78,6 +79,16 @@ export default function InputForm({ onResult }: Props) {
                         required
                         value={form.name}
                         onChange={(e) => set("name", e.target.value)}
+                    />
+                </div>
+                <div>
+                    <label className={labelClass}>Phone Number</label>
+                    <input
+                        className={inputClass}
+                        type="tel"
+                        placeholder="Phone Number"
+                        value={form.phone}
+                        onChange={(e) => set("phone", e.target.value)}
                     />
                 </div>
                 <div>

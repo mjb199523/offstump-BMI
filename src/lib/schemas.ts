@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const userInputSchema = z.object({
     name: z.string().optional().default(""),
+    phone: z.string().optional().default(""),
     age: z.coerce
         .number()
         .int()
